@@ -6,7 +6,7 @@
         <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="achievments" inverseEntity="Player" syncable="YES"/>
         <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="achievments" inverseEntity="Task" syncable="YES"/>
     </entity>
-    <entity name="Category" representedClassName="Category" syncable="YES">
+    <entity name="CategoryTask" representedClassName="CategoryTask" syncable="YES">
         <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="categoryTrophies" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CategoryTrophy" inverseName="category" inverseEntity="CategoryTrophy" syncable="YES"/>
         <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Task" inverseName="category" inverseEntity="Task" syncable="YES"/>
@@ -14,7 +14,7 @@
     <entity name="CategoryTrophy" representedClassName="CategoryTrophy" syncable="YES">
         <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="categoryTrophies" inverseEntity="Category" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryTask" inverseName="categoryTrophies" inverseEntity="CategoryTask" syncable="YES"/>
     </entity>
     <entity name="Event" representedClassName="Event" syncable="YES">
         <attribute name="checked" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -32,7 +32,7 @@
         <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="point" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="achievments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Achievement" inverseName="task" inverseEntity="Achievement" syncable="YES"/>
-        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="tasks" inverseEntity="Category" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryTask" inverseName="tasks" inverseEntity="CategoryTask" syncable="YES"/>
         <relationship name="trophies" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Trophy" inverseName="task" inverseEntity="Trophy" syncable="YES"/>
     </entity>
     <entity name="Trophy" representedClassName="Trophy" syncable="YES">
@@ -42,7 +42,7 @@
     </entity>
     <elements>
         <element name="Player" positionX="-63" positionY="-18" width="128" height="88"/>
-        <element name="Category" positionX="-54" positionY="-9" width="128" height="88"/>
+        <element name="CategoryTask" positionX="-54" positionY="-9" width="128" height="88"/>
         <element name="Task" positionX="-36" positionY="9" width="128" height="133"/>
         <element name="Achievement" positionX="-18" positionY="27" width="128" height="103"/>
         <element name="Event" positionX="0" positionY="45" width="128" height="103"/>

@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Category;
+@class CategoryTask;
 
 @interface CategoryTrophy : NSManagedObject
 
 @property (nonatomic, retain) NSString * libelle;
 @property (nonatomic, retain) NSString * type;
-@property (nonatomic, retain) Category *category;
+@property (nonatomic, retain) CategoryTask *category;
 
 @end

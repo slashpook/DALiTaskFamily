@@ -7,7 +7,7 @@
 //
 
 #import "CategoryTrophy.h"
-#import "Category.h"
+#import "CategoryTask.h"
 
 
 @implementation CategoryTrophy
