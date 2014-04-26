@@ -112,6 +112,7 @@
 		6D545D44190C11B9001ADBAE /* DALiTaskFamily */ = {
 			isa = PBXGroup;
 			children = (
+				6D545D73190C12E4001ADBAE /* Model */,
 				6D545D4D190C11B9001ADBAE /* DDAppDelegate.h */,
 				6D545D4E190C11B9001ADBAE /* DDAppDelegate.m */,
 				6D545D50190C11B9001ADBAE /* Main.storyboard */,
@@ -150,6 +151,29 @@
 				6D545D66190C11BA001ADBAE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D545D73190C12E4001ADBAE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6D545D75190C12F5001ADBAE /* DatabaseAccess */,
+				6D545D74190C12EB001ADBAE /* Entities */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		6D545D74190C12EB001ADBAE /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		6D545D75190C12F5001ADBAE /* DatabaseAccess */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DatabaseAccess;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
