@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Achievement" representedClassName="Achievement" syncable="YES">
+        <attribute name="week" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="achievement" inverseEntity="Event" syncable="YES"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="achievments" inverseEntity="Player" syncable="YES"/>
+        <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="achievments" inverseEntity="Task" syncable="YES"/>
+    </entity>
+    <entity name="Category" representedClassName="Category" syncable="YES">
+        <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="categoryTrophies" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CategoryTrophy" inverseName="category" inverseEntity="CategoryTrophy" syncable="YES"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Task" inverseName="category" inverseEntity="Task" syncable="YES"/>
+    </entity>
+    <entity name="CategoryTrophy" representedClassName="CategoryTrophy" syncable="YES">
+        <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="categoryTrophies" inverseEntity="Category" syncable="YES"/>
+    </entity>
+    <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="checked" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="day" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recurrent" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="achievement" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Achievement" inverseName="events" inverseEntity="Achievement" syncable="YES"/>
+    </entity>
+    <entity name="Player" representedClassName="Player" syncable="YES">
+        <attribute name="pathImage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pseudo" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="achievments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Achievement" inverseName="player" inverseEntity="Achievement" syncable="YES"/>
+    </entity>
+    <entity name="Task" representedClassName="Task" syncable="YES">
+        <attribute name="history" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="point" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="achievments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Achievement" inverseName="task" inverseEntity="Achievement" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="tasks" inverseEntity="Category" syncable="YES"/>
+        <relationship name="trophies" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Trophy" inverseName="task" inverseEntity="Trophy" syncable="YES"/>
+    </entity>
+    <entity name="Trophy" representedClassName="Trophy" syncable="YES">
+        <attribute name="iteration" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="trophies" inverseEntity="Task" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Player" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="Category" positionX="-54" positionY="-9" width="128" height="88"/>
+        <element name="Task" positionX="-36" positionY="9" width="128" height="133"/>
+        <element name="Achievement" positionX="-18" positionY="27" width="128" height="103"/>
+        <element name="Event" positionX="0" positionY="45" width="128" height="103"/>
+        <element name="Trophy" positionX="18" positionY="63" width="128" height="88"/>
+        <element name="CategoryTrophy" positionX="36" positionY="81" width="128" height="88"/>
+    </elements>
+</model>
