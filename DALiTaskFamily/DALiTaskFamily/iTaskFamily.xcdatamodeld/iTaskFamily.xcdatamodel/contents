@@ -37,7 +37,7 @@
     </entity>
     <entity name="Trophy" representedClassName="Trophy" syncable="YES">
         <attribute name="iteration" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="trophies" inverseEntity="Task" syncable="YES"/>
     </entity>
     <elements>
@@ -47,6 +47,6 @@
         <element name="Event" positionX="0" positionY="45" width="128" height="103"/>
         <element name="Player" positionX="-63" positionY="-18" width="128" height="88"/>
         <element name="Task" positionX="-36" positionY="9" width="128" height="133"/>
-        <element name="Trophy" positionX="18" positionY="63" width="128" height="88"/>
+        <element name="Trophy" positionX="18" positionY="63" width="128" height="90"/>
     </elements>
 </model>
