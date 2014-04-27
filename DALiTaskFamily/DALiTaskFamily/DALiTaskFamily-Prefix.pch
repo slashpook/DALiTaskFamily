@@ -14,4 +14,11 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
+    #import "Achievement.h"
+    #import "CategoryTrophy.h"
+    #import "CategoryTask.h"
+    #import "Event.h"
+    #import "Player.h"
+    #import "Task.h"
+    #import "Trophy.h"
 #endif

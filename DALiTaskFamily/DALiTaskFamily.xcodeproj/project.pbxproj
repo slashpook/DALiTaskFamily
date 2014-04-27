@@ -30,6 +30,7 @@
 		6D545D8D190C19F4001ADBAE /* CategoryTrophy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D545D8C190C19F4001ADBAE /* CategoryTrophy.m */; };
 		6D545D90190C1B1A001ADBAE /* DDDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D545D8F190C1B1A001ADBAE /* DDDatabaseManager.m */; };
 		6D545D96190C1CEA001ADBAE /* CategoryTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D545D95190C1CEA001ADBAE /* CategoryTask.m */; };
+		6D5CD672190D4132002E226B /* DDDatabaseAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5CD671190D4132002E226B /* DDDatabaseAccess.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,8 @@
 		6D545D8F190C1B1A001ADBAE /* DDDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDatabaseManager.m; sourceTree = "<group>"; };
 		6D545D94190C1CEA001ADBAE /* CategoryTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTask.h; sourceTree = "<group>"; };
 		6D545D95190C1CEA001ADBAE /* CategoryTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTask.m; sourceTree = "<group>"; };
+		6D5CD670190D4132002E226B /* DDDatabaseAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDatabaseAccess.h; sourceTree = "<group>"; };
+		6D5CD671190D4132002E226B /* DDDatabaseAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDatabaseAccess.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +218,8 @@
 				6D545D76190C144B001ADBAE /* iTaskFamily.xcdatamodeld */,
 				6D545D8E190C1B1A001ADBAE /* DDDatabaseManager.h */,
 				6D545D8F190C1B1A001ADBAE /* DDDatabaseManager.m */,
+				6D5CD670190D4132002E226B /* DDDatabaseAccess.h */,
+				6D5CD671190D4132002E226B /* DDDatabaseAccess.m */,
 			);
 			name = DatabaseAccess;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 				6D545D8D190C19F4001ADBAE /* CategoryTrophy.m in Sources */,
 				6D545D96190C1CEA001ADBAE /* CategoryTask.m in Sources */,
 				6D545D87190C19F4001ADBAE /* Player.m in Sources */,
+				6D5CD672190D4132002E226B /* DDDatabaseAccess.m in Sources */,
 				6D545D81190C19F4001ADBAE /* Event.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,6 +541,7 @@
 				6D545D6F190C11BA001ADBAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D545D70190C11BA001ADBAE /* Build configuration list for PBXNativeTarget "DALiTaskFamilyTests" */ = {
 			isa = XCConfigurationList;
@@ -543,6 +550,7 @@
 				6D545D72190C11BA001ADBAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
