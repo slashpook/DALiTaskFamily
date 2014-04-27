@@ -76,6 +76,12 @@
 //On récupère tous les players
 - (NSArray *)getPlayers;
 
+//On récupère le joueur donné
+- (Player *)getPlayerForPseudo:(NSString *)pseudo;
+
+//On récupère le joueur à l'index donné
+- (Player *)getPlayerAtIndex:(int)index;
+
 //On supprime le player donné
 - (void)deletePlayer:(Player *)player;
 

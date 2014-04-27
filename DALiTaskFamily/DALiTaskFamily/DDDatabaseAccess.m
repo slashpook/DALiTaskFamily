@@ -87,7 +87,7 @@
     return arrayEntities;
 }
 
-//On récupère tous les achievements d'une semaine donnée (utile pour récupérer les points gagnés dans la semaine)
+//On récupère tous les achievements d'une semaine donnée pour un joueur donné (utile pour récupérer les points gagnés dans la semaine)
 - (NSArray *)getAchievementsForPlayer:(Player *)player atWeekAndYear:(int)weekAndYear
 {
     //On défini la classe pour la requète
@@ -199,6 +199,40 @@
     }
     
     return arrayEntities;
+}
+
+//On récupère le joueur donné
+- (Player *)getPlayerForPseudo:(NSString *)pseudo
+{
+    //On défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Player" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    
+    //On rajoute un filtre
+    NSPredicate *newPredicate = [NSPredicate predicateWithFormat:@"pseudo == %@" , pseudo];
+    [fetchRequest setPredicate:newPredicate];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    //On renvoie le tableau de la requète
+    if ([fetchedObjects count] > 0)
+        return [fetchedObjects objectAtIndex:0];
+    else
+        return nil;
+}
+
+//On récupère le joueur à l'index donné
+- (Player *)getPlayerAtIndex:(int)index
+{
+    NSArray *arrayPlayer = [self getPlayers];
+    
+    if ([arrayPlayer count] > 0 && [arrayPlayer count] >= (index + 1))
+        return [arrayPlayer objectAtIndex:index];
+    else
+        return nil;
 }
 
 //On supprime le player donné
