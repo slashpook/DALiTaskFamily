@@ -56,7 +56,7 @@
 //On récupère tous les objets de l'entity donnée
 - (NSArray *)getAllObjectForEntity:(NSString *)entityName
 {
-    //On Défini la classe pour la requète
+    //On défini la classe pour la requète
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entityDescription = [NSEntityDescription
                                    entityForName:entityName inManagedObjectContext:self.dataBaseManager.managedObjectContext];
@@ -85,6 +85,26 @@
     }
 
     return arrayEntities;
+}
+
+//On récupère tous les achievements d'une semaine donnée (utile pour récupérer les points gagnés dans la semaine)
+- (NSArray *)getAchievementsForPlayer:(Player *)player atWeekAndYear:(int)weekAndYear
+{
+    //On défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                   entityForName:@"Achievement" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    
+    //On rajoute un filtre
+    NSPredicate *newPredicate = [NSPredicate predicateWithFormat:@"player.pseudo == %@ && weekAndYear == %i", player.pseudo, weekAndYear];
+    [fetchRequest setPredicate:newPredicate];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    //On renvoie le tableau de la requète
+    return fetchedObjects;
 }
 
 //On supprime l'achievement donné

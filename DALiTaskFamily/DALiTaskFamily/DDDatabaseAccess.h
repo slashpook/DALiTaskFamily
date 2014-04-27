@@ -37,6 +37,9 @@
 //On récupère tous les achievements
 - (NSArray *)getAchievements;
 
+//On récupère tous les achievements d'une semaine donnée (utile pour récupérer les points gagnés dans la semaine)
+- (NSArray *)getAchievementsForPlayer:(Player *)player atWeekAndYear:(int)weekAndYear;
+
 //On supprime l'achievement donné
 - (void)deleteAchievement:(Achievement *)achievement;
 
