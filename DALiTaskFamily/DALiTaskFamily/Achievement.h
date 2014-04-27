@@ -2,20 +2,20 @@
 //  Achievement.h
 //  DALiTaskFamily
 //
-//  Created by Damien DELES on 26/04/2014.
+//  Created by Damien DELES on 27/04/2014.
 //  Copyright (c) 2014 Damien DELES. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Event, Task;
+@class Event, Player, Task;
 
 @interface Achievement : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * week;
-@property (nonatomic, retain) NSManagedObject *player;
+@property (nonatomic, retain) NSNumber * weekAndYear;
 @property (nonatomic, retain) NSSet *events;
+@property (nonatomic, retain) Player *player;
 @property (nonatomic, retain) Task *task;
 @end
 

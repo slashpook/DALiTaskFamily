@@ -31,6 +31,7 @@
 		6D545D90190C1B1A001ADBAE /* DDDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D545D8F190C1B1A001ADBAE /* DDDatabaseManager.m */; };
 		6D545D96190C1CEA001ADBAE /* CategoryTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D545D95190C1CEA001ADBAE /* CategoryTask.m */; };
 		6D5CD672190D4132002E226B /* DDDatabaseAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5CD671190D4132002E226B /* DDDatabaseAccess.m */; };
+		6D5CD675190D4C33002E226B /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5CD674190D4C33002E226B /* Achievement.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,8 @@
 		6D545D95190C1CEA001ADBAE /* CategoryTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTask.m; sourceTree = "<group>"; };
 		6D5CD670190D4132002E226B /* DDDatabaseAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDatabaseAccess.h; sourceTree = "<group>"; };
 		6D5CD671190D4132002E226B /* DDDatabaseAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDatabaseAccess.m; sourceTree = "<group>"; };
+		6D5CD673190D4C33002E226B /* Achievement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Achievement.h; sourceTree = "<group>"; };
+		6D5CD674190D4C33002E226B /* Achievement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Achievement.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +219,8 @@
 			isa = PBXGroup;
 			children = (
 				6D545D76190C144B001ADBAE /* iTaskFamily.xcdatamodeld */,
+				6D5CD673190D4C33002E226B /* Achievement.h */,
+				6D5CD674190D4C33002E226B /* Achievement.m */,
 				6D545D8E190C1B1A001ADBAE /* DDDatabaseManager.h */,
 				6D545D8F190C1B1A001ADBAE /* DDDatabaseManager.m */,
 				6D5CD670190D4132002E226B /* DDDatabaseAccess.h */,
@@ -323,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D545D4F190C11B9001ADBAE /* DDAppDelegate.m in Sources */,
+				6D5CD675190D4C33002E226B /* Achievement.m in Sources */,
 				6D545D84190C19F4001ADBAE /* Achievement.m in Sources */,
 				6D545D90190C1B1A001ADBAE /* DDDatabaseManager.m in Sources */,
 				6D545D55190C11B9001ADBAE /* DDViewController.m in Sources */,

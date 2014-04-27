@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Achievement" representedClassName="Achievement" syncable="YES">
-        <attribute name="week" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="weekAndYear" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="achievement" inverseEntity="Event" syncable="YES"/>
         <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="achievments" inverseEntity="Player" syncable="YES"/>
         <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="achievments" inverseEntity="Task" syncable="YES"/>
@@ -41,12 +41,12 @@
         <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="trophies" inverseEntity="Task" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Player" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="Achievement" positionX="-18" positionY="27" width="128" height="105"/>
         <element name="CategoryTask" positionX="-54" positionY="-9" width="128" height="88"/>
-        <element name="Task" positionX="-36" positionY="9" width="128" height="133"/>
-        <element name="Achievement" positionX="-18" positionY="27" width="128" height="103"/>
-        <element name="Event" positionX="0" positionY="45" width="128" height="103"/>
-        <element name="Trophy" positionX="18" positionY="63" width="128" height="88"/>
         <element name="CategoryTrophy" positionX="36" positionY="81" width="128" height="88"/>
+        <element name="Event" positionX="0" positionY="45" width="128" height="103"/>
+        <element name="Player" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="Task" positionX="-36" positionY="9" width="128" height="133"/>
+        <element name="Trophy" positionX="18" positionY="63" width="128" height="88"/>
     </elements>
 </model>
