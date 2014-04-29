@@ -87,7 +87,7 @@
     return arrayEntities;
 }
 
-//On récupère tous les achievements d'une semaine donnée pour un joueur donné (utile pour récupérer les points gagnés dans la semaine)
+//On récupère tous les achievements d'une semaine donnée pour un player donné (utile pour récupérer les points gagnés dans la semaine)
 - (NSArray *)getAchievementsForPlayer:(Player *)player atWeekAndYear:(int)weekAndYear
 {
     //On défini la classe pour la requète
@@ -195,6 +195,27 @@
     return fetchedObjects;
 }
 
+//On récupère tous les events réalisé d'un player donné pour une task donnée.
+- (int)getNumberOfEventCheckedForPlayer:(Player *)player forTask:(Task *)task
+{
+    //On défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Event" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    
+    //On rajoute un filtre
+    NSPredicate *newPredicate = [NSPredicate predicateWithFormat:@"achievement.player.pseudo == %@ && achievement.task.libelle == %@", player.pseudo, task.libelle];
+    [fetchRequest setPredicate:newPredicate];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    
+    //On renvoie le tableau de la requète
+    return (int)[fetchedObjects count];
+}
+
 //On supprime l'event donné
 - (void)deleteEvent:(Event *)event
 {
@@ -271,6 +292,34 @@
     return [self getAllObjectForEntity:@"Task"];
 }
 
+//On récupère les tasks d'une categoryTask
+- (NSArray *)getTasksForCategory:(CategoryTask *)category
+{
+    //On défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Task" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    
+    //On rajoute un filtre
+    NSPredicate *newPredicate = [NSPredicate predicateWithFormat:@"category.libelle == %@", category.libelle];
+    [fetchRequest setPredicate:newPredicate];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    //Si on a des tasks, on les tries par libelle
+    if (fetchedObjects.count > 0)
+    {
+        fetchedObjects = [fetchedObjects sortedArrayUsingComparator:^NSComparisonResult(Task *obj1, Task *obj2) {
+            return (NSComparisonResult)[obj1.libelle compare:obj2.libelle];
+        }];
+    }
+    
+    //On renvoie le tableau de la requète
+    return fetchedObjects;
+}
+
 //On supprime la task donnée
 - (void)deleteTask:(Task *)task
 {
@@ -285,6 +334,40 @@
 - (NSArray *)getTrophies
 {
     return [self getAllObjectForEntity:@"Trophy"];
+}
+
+//On récupère le nombre de trophies réalisés pour un joueur donné, une catégorie donnée et un type de trophé donné
+- (int)getNumberOfTrophyAchievedForPlayer:(Player *)player inCategory:(CategoryTask *)category andType:(NSString *)type
+{
+    int numberOfTrophyAchieved = 0;
+    
+    if (player != nil)
+    {
+        //On récupère les tasks de la categoryTask donnée triés par ordre alphabétique
+        NSArray *arrayTasks = [self getTasksForCategory:category];
+        
+        //Si on a des résultats, on les parses
+        if ([arrayTasks count] > 0)
+        {
+            for (Task *task in arrayTasks)
+            {
+                //On parse les trophies de chaque task
+                for (Trophy *trophy in [task.trophies allObjects])
+                {
+                    //Si on trouve le bon, on le rajoute dans le tableau
+                    if ([trophy.type isEqualToString:type])
+                    {
+                        int numberOfEventChecked = [self getNumberOfEventCheckedForPlayer:player forTask:task];
+                        
+                        if ([trophy.iteration intValue] >= numberOfEventChecked)
+                            numberOfTrophyAchieved ++;
+                    }
+                }
+            }
+        }
+    }
+
+    return numberOfTrophyAchieved;
 }
 
 //On supprime le trophy donné

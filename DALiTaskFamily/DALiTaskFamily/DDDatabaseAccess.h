@@ -70,6 +70,9 @@
 //On récupère tous les events d'un joueur données, pour une semaine donnée et un jour donné
 - (NSArray *)getEventsForPlayer:(Player *)player atWeekAndYear:(int)weekAndYear andDay:(NSString *)day;
 
+//On récupère tous les events réalisé d'un player donné pour une task donnée.
+- (int)getNumberOfEventCheckedForPlayer:(Player *)player forTask:(Task *)task;
+
 //On supprime l'event donné
 - (void)deleteEvent:(Event *)event;
 
@@ -94,6 +97,9 @@
 //On récupère tous les tasks
 - (NSArray *)getTasks;
 
+//On récupère les tasks d'une categoryTask
+- (NSArray *)getTasksForCategory:(CategoryTask *)category;
+
 //On supprime la task donnée
 - (void)deleteTask:(Task *)task;
 
@@ -102,6 +108,9 @@
 
 //On récupère tous les trophies
 - (NSArray *)getTrophies;
+
+//On récupère le nombre de trophies réalisés pour un joueur donné, une catégorie donnée et un type de trophé donné;
+- (int)getNumberOfTrophyAchievedForPlayer:(Player *)player inCategory:(CategoryTask *)category andType:(NSString *)type;
 
 //On supprime le trophy donné
 - (void)deleteTrophy:(Trophy *)trophy;
