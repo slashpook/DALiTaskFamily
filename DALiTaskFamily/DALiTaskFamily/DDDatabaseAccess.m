@@ -71,6 +71,13 @@
 
 #pragma mark - CRUD Achievement
 
+
+//On crée l'achievement après avoir fait quelques tests préalable
+- (NSString *)createAchievement:(Achievement *)achievement
+{
+    return nil;
+}
+
 //On récupère tous les achievements
 - (NSArray *)getAchievements
 {
@@ -116,6 +123,7 @@
 
 
 #pragma mark - CRUD CategoryTask
+
 
 //On récupère toutes les categoryTasks
 - (NSArray *)getCategoryTasks
@@ -168,6 +176,13 @@
 
 
 #pragma mark - CRUD Event
+
+
+//On crée l'event après avoir fait quelques tests préalable
+- (NSString *)createEvent:(Event *)event
+{
+    return nil;
+}
 
 //On récupère tous les events
 - (NSArray *)getEvents
@@ -225,6 +240,12 @@
 
 
 #pragma mark - CRUD Player
+
+//On crée le player après avoir fait quelques tests préalable
+- (NSString *)createPlayer:(Player *)player
+{
+    return nil;
+}
 
 //On récupère tous les players
 - (NSArray *)getPlayers
@@ -286,6 +307,13 @@
 
 #pragma mark - CRUD Task
 
+//On crée la task après avoir fait quelques tests préalable
+- (NSString *)createTask:(Task *)task
+{
+    return nil;
+}
+
+
 //On récupère tous les tasks
 - (NSArray *)getTasks
 {
@@ -329,6 +357,12 @@
 
 
 #pragma mark - CRUD Trophy
+
+//On crée le trophy après avoir fait quelques tests préalable
+- (NSString *)createTrophy:(Trophy *)trophy
+{
+    return nil;
+}
 
 //On récupère tous les trophies
 - (NSArray *)getTrophies
