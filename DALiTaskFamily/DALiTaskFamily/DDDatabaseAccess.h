@@ -67,6 +67,9 @@
 //On récupère tous les events
 - (NSArray *)getEvents;
 
+//On récupère tous les events d'un joueur données, pour une semaine donnée et un jour donné
+- (NSArray *)getEventsForPlayer:(Player *)player atWeekAndYear:(int)weekAndYear andDay:(NSString *)day;
+
 //On supprime l'event donné
 - (void)deleteEvent:(Event *)event;
 

@@ -175,6 +175,26 @@
     return [self getAllObjectForEntity:@"Event"];
 }
 
+//On récupère tous les events d'un joueur données, pour une semaine donnée et un jour donné
+- (NSArray *)getEventsForPlayer:(Player *)player atWeekAndYear:(int)weekAndYear andDay:(NSString *)day
+{
+    //On défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Event" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    
+    //On rajoute un filtre
+    NSPredicate *newPredicate = [NSPredicate predicateWithFormat:@"achievement.player.pseudo == %@ && achievement.weekAndYear == %i && day == %@", player.pseudo, weekAndYear, day];
+    [fetchRequest setPredicate:newPredicate];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    //On renvoie le tableau de la requète
+    return fetchedObjects;
+}
+
 //On supprime l'event donné
 - (void)deleteEvent:(Event *)event
 {
