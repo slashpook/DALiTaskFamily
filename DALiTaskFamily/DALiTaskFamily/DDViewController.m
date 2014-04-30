@@ -17,7 +17,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    [self addPlayerWithName:@"Damien"];
+    [self addPlayerWithName:@"Damien"];
+    [self addPlayerWithName:@"Thomas"];
+    
+    NSArray *arrayPlayer = [[DDDatabaseAccess instance] getPlayers];
+    for (Player *player in arrayPlayer) {
+        NSLog(@"Joueur : %@", player.pseudo);
+    }
+}
+
+- (void)addPlayerWithName:(NSString *)pseudo
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Player" inManagedObjectContext:[DDDatabaseAccess instance].dataBaseManager.managedObjectContext];
+    Player *player = [[Player alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+    player.pseudo = pseudo;
+    
+    NSString *message = [[DDDatabaseAccess instance] createPlayer:player];
+    
+    if (message != nil)
+        NSLog(@"Erreur : %@", message);
+    else
+        NSLog(@"Joueur crée");
 }
 
 - (void)didReceiveMemoryWarning

@@ -59,7 +59,7 @@
     //On défini la classe pour la requète
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entityDescription = [NSEntityDescription
-                                   entityForName:entityName inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+                                              entityForName:entityName inManagedObjectContext:self.dataBaseManager.managedObjectContext];
     [fetchRequest setEntity:entityDescription];
     
     NSError *error;
@@ -90,7 +90,7 @@
             return (NSComparisonResult)[obj2.weekAndYear compare:obj1.weekAndYear];
         }];
     }
-
+    
     return arrayEntities;
 }
 
@@ -100,7 +100,7 @@
     //On défini la classe pour la requète
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entityDescription = [NSEntityDescription
-                                   entityForName:@"Achievement" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+                                              entityForName:@"Achievement" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
     [fetchRequest setEntity:entityDescription];
     
     //On rajoute un filtre
@@ -244,6 +244,29 @@
 //On crée le player après avoir fait quelques tests préalable
 - (NSString *)createPlayer:(Player *)player
 {
+    //On vérifie que un pseudo soit rentré
+    if ([player.pseudo length] != 0)
+    {
+        //Si le pseudo n'existe pas déjà
+        if ([self getPlayerForPseudo:player.pseudo] == nil)
+        {
+            //On sauvegarde le player
+            [self.dataBaseManager.managedObjectContext insertObject:player];
+            [self saveContext];
+            return nil;
+        }
+        else
+        {
+            //On renvoie un message d'erreur
+            return @"Un autre joueur porte déjà ce nom !";
+        }
+    }
+    else
+    {
+        //On renvoie un message d'erreur
+        return @"Veuillez rentrer un pseudo svp !";
+    }
+
     return nil;
 }
 
@@ -400,7 +423,7 @@
             }
         }
     }
-
+    
     return numberOfTrophyAchieved;
 }
 
