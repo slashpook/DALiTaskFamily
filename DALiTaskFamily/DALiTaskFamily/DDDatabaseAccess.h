@@ -127,6 +127,12 @@
 //On récupère tous les trophies
 - (NSArray *)getTrophies;
 
+//On récupère le trophy pour le type donnée
+- (Trophy *)getTrophyForType:(NSString *)type inArray:(NSArray *)arrayTrophies;
+
+//On tri le tableau de trophies
+- (NSArray *)getTrophiesSortedInArray:(NSArray *)arrayTrophies;
+
 //On récupère le nombre de trophies réalisés pour un joueur donné, une catégorie donnée et un type de trophé donné;
 - (int)getNumberOfTrophyAchievedForPlayer:(Player *)player inCategory:(CategoryTask *)category andType:(NSString *)type;
 

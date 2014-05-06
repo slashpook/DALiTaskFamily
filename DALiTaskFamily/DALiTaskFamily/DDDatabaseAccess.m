@@ -462,6 +462,32 @@
     return [self getAllObjectForEntity:@"Trophy"];
 }
 
+//On récupère le trophy pour le type donnée
+- (Trophy *)getTrophyForType:(NSString *)type inArray:(NSArray *)arrayTrophies
+{
+    //On parse le tableau pour récupérer le bon trophy
+    for (Trophy *trophy in arrayTrophies)
+    {
+        if ([[trophy type] isEqualToString:type])
+            return trophy;
+    }
+    
+    return nil;
+}
+
+//On tri le tableau de trophies
+- (NSArray *)getTrophiesSortedInArray:(NSArray *)arrayTrophies
+{
+    //On crée le tableau de trophies et on les récupère dans le bon ordre
+    NSMutableArray *arrayTrophiesSort = [[NSMutableArray alloc] init];
+    
+    [arrayTrophiesSort addObject:[self getTrophyForType:@"Bronze" inArray:arrayTrophies]];
+    [arrayTrophiesSort addObject:[self getTrophyForType:@"Argent" inArray:arrayTrophies]];
+    [arrayTrophiesSort addObject:[self getTrophyForType:@"Or" inArray:arrayTrophies]];
+    
+    return arrayTrophiesSort;
+}
+
 //On récupère le nombre de trophies réalisés pour un joueur donné, une catégorie donnée et un type de trophé donné
 - (int)getNumberOfTrophyAchievedForPlayer:(Player *)player inCategory:(CategoryTask *)category andType:(NSString *)type
 {

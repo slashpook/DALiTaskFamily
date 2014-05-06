@@ -35,7 +35,7 @@
     for (Task *task in arrayTask) {
         NSLog(@"Task : %@, Point : %@", task.libelle, task.point);
         
-        for (Trophy *trophy in task.trophies) {
+        for (Trophy *trophy in [[DDDatabaseAccess instance] getTrophiesSortedInArray:[task.trophies allObjects]]) {
             NSLog(@"Trophy %@, Iteration: %@", trophy.type, trophy.iteration);
         }
     }
