@@ -28,8 +28,8 @@
     }
     
     [self addTaskWithLibelle:@"Tache 3" andPoint:300];
-//    [self addTaskWithLibelle:@"Tache 1" andPoint:800];
-//    [self addTaskWithLibelle:@"Tache 2" andPoint:500];
+    [self addTaskWithLibelle:@"Tache 1" andPoint:800];
+    [self addTaskWithLibelle:@"Tache 2" andPoint:500];
     
     NSArray *arrayTask = [[DDDatabaseAccess instance] getTasks];
     for (Task *task in arrayTask) {
@@ -39,6 +39,26 @@
             NSLog(@"Trophy %@, Iteration: %@", trophy.type, trophy.iteration);
         }
     }
+    
+    Player *player = [[DDDatabaseAccess instance] getPlayerForPseudo:@"Damien"];
+    Player *player2 = [[DDDatabaseAccess instance] getPlayerForPseudo:@"Thomas"];
+    Task *task = [[DDDatabaseAccess instance] getTaskWithLibelle:@"Tache 1"];
+    Task *task2 = [[DDDatabaseAccess instance] getTaskWithLibelle:@"Tache 2"];
+    
+    [self addEventForPlayer:player andTask:task atDay:@"Lundi"];
+    [self addEventForPlayer:player andTask:task atDay:@"Lundi"];
+    [self addEventForPlayer:player andTask:task2 atDay:@"Lundi"];
+    [self addEventForPlayer:player andTask:task atDay:@"Mardi"];
+    [self addEventForPlayer:player2 andTask:task atDay:@"Lundi"];
+    [self addEventForPlayer:player2 andTask:task atDay:@"Vendredi"];
+    [self addEventForPlayer:player2 andTask:task2 atDay:@"Lundi"];
+    
+    NSArray *arrayEvent = [[DDDatabaseAccess instance] getEventsForPlayer:player atWeekAndYear:201423 andDay:@"Lundi"];
+    
+    for (Event *event in arrayEvent) {
+        NSLog(@"Event pour le joueur : %@, tache : %@, jour : %@, weekAndYear : %@", event.achievement.player.pseudo, event.achievement.task.libelle, event.day, event.achievement.weekAndYear);
+    }
+
 }
 
 - (void)addPlayerWithName:(NSString *)pseudo
@@ -83,6 +103,22 @@
         NSLog(@"Erreur : %@", message);
     else
         NSLog(@"Task crée");
+}
+
+- (void)addEventForPlayer:(Player *)player andTask:(Task *)task atDay:(NSString *)day;
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:[DDDatabaseAccess instance].dataBaseManager.managedObjectContext];
+    Event *event = [[Event alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+    event.day = day;
+    event.recurrent = [NSNumber numberWithBool:NO];
+    event.comment = @"TG";
+    
+    NSString *message = [[DDDatabaseAccess instance] createEvent:event forPlayer:player forTask:task atWeekAndYear:201423];
+    
+    if (message != nil)
+        NSLog(@"Erreur : %@", message);
+    else
+        NSLog(@"Event crée");
 }
 
 - (void)didReceiveMemoryWarning

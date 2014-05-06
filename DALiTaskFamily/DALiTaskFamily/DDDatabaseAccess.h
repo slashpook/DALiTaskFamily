@@ -34,14 +34,17 @@
 
 #pragma mark - CRUD Achievement
 
-//On crée l'achievement après avoir fait quelques tests préalable
-- (NSString *)createAchievement:(Achievement *)achievement;
+//On crée l'achievement pour le player donné, la task donnée et la date donnée
+- (Achievement *)createAchievementForPlayer:(Player *)player andTask:(Task *)task atWeekAndYear:(int)weekAndYear;
 
 //On récupère tous les achievements
 - (NSArray *)getAchievements;
 
 //On récupère tous les achievements d'une semaine donnée (utile pour récupérer les points gagnés dans la semaine)
 - (NSArray *)getAchievementsForPlayer:(Player *)player atWeekAndYear:(int)weekAndYear;
+
+//On récupère l'achievement d'une semaine donnée pour un player donné et une task donnée
+- (Achievement *)getAchievementsForPlayer:(Player *)player forTask:(Task *)task atWeekAndYear:(int)weekAndYear;
 
 //On supprime l'achievement donné
 - (void)deleteAchievement:(Achievement *)achievement;
@@ -68,13 +71,16 @@
 #pragma mark - CRUD Event
 
 //On crée l'event après avoir fait quelques tests préalable
-- (NSString *)createEvent:(Event *)event;
+- (NSString *)createEvent:(Event *)event forPlayer:(Player *)player forTask:(Task *)task atWeekAndYear:(int)weekAndYear;
 
 //On récupère tous les events
 - (NSArray *)getEvents;
 
 //On récupère tous les events d'un joueur données, pour une semaine donnée et un jour donné
 - (NSArray *)getEventsForPlayer:(Player *)player atWeekAndYear:(int)weekAndYear andDay:(NSString *)day;
+
+//On récupère l'event de l'achievement donnée, au jour donné
+- (Event *)getEventForAchievement:(Achievement *)achievement andDay:(NSString *)day;
 
 //On récupère tous les events réalisé d'un player donné pour une task donnée.
 - (int)getNumberOfEventCheckedForPlayer:(Player *)player forTask:(Task *)task;

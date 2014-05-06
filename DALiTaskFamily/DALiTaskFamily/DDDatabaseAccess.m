@@ -73,10 +73,16 @@
 #pragma mark - CRUD Achievement
 
 
-//On crée l'achievement après avoir fait quelques tests préalable
-- (NSString *)createAchievement:(Achievement *)achievement
+//On crée l'achievement pour le player donné, la task donnée et la date donnée
+- (Achievement *)createAchievementForPlayer:(Player *)player andTask:(Task *)task atWeekAndYear:(int)weekAndYear
 {
-    return nil;
+    Achievement *achievement = [NSEntityDescription insertNewObjectForEntityForName:@"Achievement"
+                                                inManagedObjectContext:[DDDatabaseAccess instance].dataBaseManager.managedObjectContext];
+    [achievement setWeekAndYear:[NSNumber numberWithInt:weekAndYear]];
+    [achievement setPlayer:player];
+    [achievement setTask:task];
+    
+    return achievement;
 }
 
 //On récupère tous les achievements
@@ -113,6 +119,29 @@
     
     //On renvoie le tableau de la requète
     return fetchedObjects;
+}
+
+//On récupère l'achievement d'une semaine donnée pour un player donné et une task donnée
+- (Achievement *)getAchievementsForPlayer:(Player *)player forTask:(Task *)task atWeekAndYear:(int)weekAndYear
+{
+    //On défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Achievement" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    
+    //On rajoute un filtre
+    NSPredicate *newPredicate = [NSPredicate predicateWithFormat:@"player.pseudo == %@ && task.libelle = %@ && weekAndYear == %i", player.pseudo, task.libelle, weekAndYear];
+    [fetchRequest setPredicate:newPredicate];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    //On renvoie l'achievement s'il existe
+    if ([fetchedObjects count] > 0)
+        return [fetchedObjects objectAtIndex:0];
+    else
+        return nil;
 }
 
 //On supprime l'achievement donné
@@ -180,9 +209,34 @@
 
 
 //On crée l'event après avoir fait quelques tests préalable
-- (NSString *)createEvent:(Event *)event
+- (NSString *)createEvent:(Event *)event forPlayer:(Player *)player forTask:(Task *)task atWeekAndYear:(int)weekAndYear
 {
-    return nil;
+    if (task != nil)
+    {
+        //On récupère l'achievement du player s'il existe
+        Achievement *achievement = [self getAchievementsForPlayer:player forTask:task atWeekAndYear:weekAndYear];
+
+        //S'il n'existe pas, on le crée
+        if (achievement == nil)
+            achievement = [self createAchievementForPlayer:player andTask:task atWeekAndYear:weekAndYear];
+        else
+        {
+            //On regarde si on a pas déjà un event qui existe pour ce jour
+            Event *eventInDB = [self getEventForAchievement:achievement andDay:event.day];
+            
+            if (eventInDB != nil)
+                return @"Un évènement existe déjà pour cette tache";
+        }
+        
+        //On sauvegarde le trophy
+        [self.dataBaseManager.managedObjectContext insertObject:event];
+        [achievement addEventsObject:event];
+        
+        [self saveContext];
+        return nil;
+    }
+    else
+        return @"Veuillez renseigner une tache !";
 }
 
 //On récupère tous les events
@@ -209,6 +263,18 @@
     
     //On renvoie le tableau de la requète
     return fetchedObjects;
+}
+
+//On récupère l'event de l'achievement donnée, au jour donné
+- (Event *)getEventForAchievement:(Achievement *)achievement andDay:(NSString *)day
+{
+    for (Event *event in [[achievement events] allObjects])
+    {
+        if ([event.day isEqualToString:day])
+            return event;
+    }
+    
+    return nil;
 }
 
 //On récupère tous les events réalisé d'un player donné pour une task donnée.
@@ -265,7 +331,7 @@
     else
     {
         //On renvoie un message d'erreur
-        return @"Veuillez rentrer un pseudo svp !";
+        return @"Veuillez rentrer un pseudo !";
     }
     
     return nil;
