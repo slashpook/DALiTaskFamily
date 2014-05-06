@@ -181,6 +181,13 @@
 
 #pragma mark - CRUD CategoryTrophy
 
+//On crée le player après avoir fait quelques tests préalable
+- (void)createCategoryTrophy:(CategoryTrophy *)categoryTrophy
+{
+    [self.dataBaseManager.managedObjectContext insertObject:categoryTrophy];
+    [self saveContext];
+}
+
 //On récupère tous les categoryTrophies
 - (NSArray *)getCategoryTrophies
 {
@@ -195,6 +202,28 @@
     }
     
     return arrayEntities;
+}
+
+//On récupère tous les categoryTrophies de la categoryTask et on les trie
+- (NSArray *)getCategoryTrophiesForCategorySorted:(CategoryTask *)categoryTask
+{
+    //On défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"CategoryTrophy" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    
+    //On rajoute un filtre
+    NSPredicate *newPredicate = [NSPredicate predicateWithFormat:@"category.libelle == %@", categoryTask.libelle];
+    [fetchRequest setPredicate:newPredicate];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+
+    if ([fetchedObjects count] == 3)
+        return [self getTrophiesSortedInArray:fetchedObjects];
+    else
+        return nil;
 }
 
 //On supprime le categoryTrophy donné

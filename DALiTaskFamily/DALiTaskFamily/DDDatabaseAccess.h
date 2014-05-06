@@ -61,8 +61,14 @@
 
 #pragma mark - CRUD CategoryTrophy
 
+//On crée le player après avoir fait quelques tests préalable
+- (void)createCategoryTrophy:(CategoryTrophy *)categoryTrophy;
+
 //On récupère tous les categoryTrophies
 - (NSArray *)getCategoryTrophies;
+
+//On récupère tous les categoryTrophies de la categoryTask et on les trie
+- (NSArray *)getCategoryTrophiesForCategorySorted:(CategoryTask *)categoryTask;
 
 //On supprime le categoryTrophy donné
 - (void)deleteCategoryTrophy:(CategoryTrophy *)categoryTrophy;
