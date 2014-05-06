@@ -104,13 +104,16 @@
 #pragma mark - CRUD Task
 
 //On crée la task après avoir fait quelques tests préalable
-- (NSString *)createTask:(Task *)task;
+- (NSString *)createTask:(Task *)task withTrophies:(NSArray *)arrayTrophies;
 
 //On récupère tous les tasks
 - (NSArray *)getTasks;
 
 //On récupère les tasks d'une categoryTask
 - (NSArray *)getTasksForCategory:(CategoryTask *)category;
+
+//On récupère la task avec le libellé donné
+- (Task *)getTaskWithLibelle:(NSString *)libelle;
 
 //On supprime la task donnée
 - (void)deleteTask:(Task *)task;

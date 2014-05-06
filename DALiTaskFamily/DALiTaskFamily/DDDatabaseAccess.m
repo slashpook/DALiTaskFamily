@@ -69,6 +69,7 @@
     return fetchedObjects;
 }
 
+
 #pragma mark - CRUD Achievement
 
 
@@ -266,7 +267,7 @@
         //On renvoie un message d'erreur
         return @"Veuillez rentrer un pseudo svp !";
     }
-
+    
     return nil;
 }
 
@@ -331,8 +332,42 @@
 #pragma mark - CRUD Task
 
 //On crée la task après avoir fait quelques tests préalable
-- (NSString *)createTask:(Task *)task
+- (NSString *)createTask:(Task *)task withTrophies:(NSArray *)arrayTrophies
 {
+    NSString *errorMessage = nil;
+    
+    //On parse les trophies pour voir s'ils sont tous bon
+    for (Trophy *trophy in arrayTrophies)
+    {
+        errorMessage = [self createTrophy:trophy];
+        if (errorMessage != nil)
+        {
+            [self rollback];
+            return errorMessage;
+        }
+    }
+    
+    if ([task.libelle length] != 0 && task.point != nil)
+    {
+        //On fait les tests sur la tache
+        if ([self getTaskWithLibelle:task.libelle] == nil)
+        {
+            //On rajoute le context à la task
+            [self.dataBaseManager.managedObjectContext insertObject:task];
+            
+            //On ajoute les trophies
+            [task addTrophies:[NSSet setWithArray:arrayTrophies]];
+            
+            //On sauvegarde la task ainsi que les trophies
+            [self saveContext];
+            return nil;
+        }
+        else
+            return @"Une autre tache porte déjà ce nom!";
+    }
+    else
+        return @"Veuillez remplir tous les champs liés à la tache !";
+
     return nil;
 }
 
@@ -371,6 +406,32 @@
     return fetchedObjects;
 }
 
+//On récupère la task avec le libellé donné
+- (Task *)getTaskWithLibelle:(NSString *)libelle
+{
+    //On défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Task" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    
+    //On rajoute un filtre
+    NSPredicate *newPredicate = [NSPredicate predicateWithFormat:@"libelle == %@", libelle];
+    [fetchRequest setPredicate:newPredicate];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    //Si on a une task, on la renvoie
+    if (fetchedObjects.count > 0)
+    {
+        return [fetchedObjects objectAtIndex:0];
+    }
+    
+    //Sinon on renvoie nil
+    return nil;
+}
+
 //On supprime la task donnée
 - (void)deleteTask:(Task *)task
 {
@@ -384,7 +445,15 @@
 //On crée le trophy après avoir fait quelques tests préalable
 - (NSString *)createTrophy:(Trophy *)trophy
 {
-    return nil;
+    if (trophy.iteration != nil)
+    {
+        //On sauvegarde le trophy
+        [self.dataBaseManager.managedObjectContext insertObject:trophy];
+        [self saveContext];
+        return nil;
+    }
+    else
+        return [NSString stringWithFormat:@"Vous devez renseigner un trophée de %@", trophy.type];
 }
 
 //On récupère tous les trophies
