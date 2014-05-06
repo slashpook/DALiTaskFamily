@@ -97,7 +97,7 @@
     trophy3.type = @"Or";
     trophy3.iteration = [NSNumber numberWithInt:30];
     
-    NSString *message = [[DDDatabaseAccess instance] createTask:task withTrophies:[NSArray arrayWithObjects:trophy, trophy2, trophy3, nil]];
+    NSString *message = [[DDDatabaseAccess instance] createTask:task forCategory:nil withTrophies:[NSArray arrayWithObjects:trophy, trophy2, trophy3, nil]];
     
     if (message != nil)
         NSLog(@"Erreur : %@", message);

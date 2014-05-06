@@ -52,6 +52,9 @@
 
 #pragma mark - CRUD CategoryTask
 
+//On crée la categoryTask donnée
+- (void)createCategoryTask:(CategoryTask *)categoryTask;
+
 //On récupère toutes les categoryTasks
 - (NSArray *)getCategoryTasks;
 
@@ -116,7 +119,7 @@
 #pragma mark - CRUD Task
 
 //On crée la task après avoir fait quelques tests préalable
-- (NSString *)createTask:(Task *)task withTrophies:(NSArray *)arrayTrophies;
+- (NSString *)createTask:(Task *)task forCategory:(CategoryTask *)categoryTask withTrophies:(NSArray *)arrayTrophies;
 
 //On récupère tous les tasks
 - (NSArray *)getTasks;

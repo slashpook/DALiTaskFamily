@@ -154,6 +154,12 @@
 
 #pragma mark - CRUD CategoryTask
 
+//On crée la categoryTask donnée
+- (void)createCategoryTask:(CategoryTask *)categoryTask
+{
+    [self.dataBaseManager.managedObjectContext insertObject:categoryTask];
+    [self saveContext];
+}
 
 //On récupère toutes les categoryTasks
 - (NSArray *)getCategoryTasks
@@ -427,7 +433,7 @@
 #pragma mark - CRUD Task
 
 //On crée la task après avoir fait quelques tests préalable
-- (NSString *)createTask:(Task *)task withTrophies:(NSArray *)arrayTrophies
+- (NSString *)createTask:(Task *)task forCategory:(CategoryTask *)categoryTask withTrophies:(NSArray *)arrayTrophies
 {
     NSString *errorMessage = nil;
     
@@ -449,6 +455,9 @@
         {
             //On rajoute le context à la task
             [self.dataBaseManager.managedObjectContext insertObject:task];
+            
+            //On rajoute la catégory à la task
+            [task setCategory:categoryTask];
             
             //On ajoute les trophies
             [task addTrophies:[NSSet setWithArray:arrayTrophies]];
