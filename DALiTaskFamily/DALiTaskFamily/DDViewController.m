@@ -59,6 +59,9 @@
         NSLog(@"Event pour le joueur : %@, tache : %@, jour : %@, weekAndYear : %@", event.achievement.player.pseudo, event.achievement.task.libelle, event.day, event.achievement.weekAndYear);
     }
 
+    [player2 setPseudo:@"Thomas"];
+    NSString *message = [[DDDatabaseAccess instance] updatePlayer:player2];
+    NSLog(@"%@", message);
 }
 
 - (void)addPlayerWithName:(NSString *)pseudo

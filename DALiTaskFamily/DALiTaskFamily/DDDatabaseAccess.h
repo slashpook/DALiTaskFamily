@@ -82,6 +82,9 @@
 //On crée l'event après avoir fait quelques tests préalable
 - (NSString *)createEvent:(Event *)event forPlayer:(Player *)player forTask:(Task *)task atWeekAndYear:(int)weekAndYear;
 
+//On update l'event donné après avoir fait quelques test
+- (NSString *)updateEvent:(Event *)event;
+
 //On récupère tous les events
 - (NSArray *)getEvents;
 
@@ -103,11 +106,17 @@
 //On crée le player après avoir fait quelques tests préalable
 - (NSString *)createPlayer:(Player *)player;
 
+//On update le player donné après avoir fait quelques tests
+- (NSString *)updatePlayer:(Player *)player;
+
 //On récupère tous les players
 - (NSArray *)getPlayers;
 
 //On récupère le joueur donné
 - (Player *)getPlayerForPseudo:(NSString *)pseudo;
+
+//Retourne le nombre de player pour un pseudo donné
+- (int)getCountOfPlayerForPseudo:(NSString *)pseudo;
 
 //On récupère le joueur à l'index donné
 - (Player *)getPlayerAtIndex:(int)index;
@@ -120,6 +129,9 @@
 
 //On crée la task après avoir fait quelques tests préalable
 - (NSString *)createTask:(Task *)task forCategory:(CategoryTask *)categoryTask withTrophies:(NSArray *)arrayTrophies;
+
+//On update la task donnée après avoir fait quelques tests
+- (NSString *)updateTask:(Task *)task;
 
 //On récupère tous les tasks
 - (NSArray *)getTasks;

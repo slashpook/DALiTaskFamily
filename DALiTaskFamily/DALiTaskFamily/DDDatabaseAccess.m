@@ -274,6 +274,12 @@
         return @"Veuillez renseigner une tache !";
 }
 
+//On update l'event donné après avoir fait quelques test
+- (NSString *)updateEvent:(Event *)event
+{
+    return nil;
+}
+
 //On récupère tous les events
 - (NSArray *)getEvents
 {
@@ -372,6 +378,38 @@
     return nil;
 }
 
+//On update le player donné après avoir fait quelques tests
+- (NSString *)updatePlayer:(Player *)player
+{
+    NSString *errorMessage = nil;
+    
+    //On vérifie que un pseudo soit rentré
+    if ([player.pseudo length] != 0)
+    {
+        //Si le pseudo n'existe pas déjà
+        if ([self getCountOfPlayerForPseudo:player.pseudo] < 2)
+        {
+            //On sauvegarde le player
+            [self saveContext];
+            return nil;
+        }
+        else
+        {
+            //On renvoie un message d'erreur
+            errorMessage = @"Un autre joueur porte déjà ce nom !";
+        }
+    }
+    else
+    {
+        //On renvoie un message d'erreur
+        errorMessage = @"Veuillez rentrer un pseudo !";
+    }
+    
+    //On fait un rollback sur les modifications
+    [self rollback];
+    return errorMessage;
+}
+
 //On récupère tous les players
 - (NSArray *)getPlayers
 {
@@ -409,6 +447,25 @@
         return [fetchedObjects objectAtIndex:0];
     else
         return nil;
+}
+
+//Retourne le nombre de player pour un pseudo donné
+- (int)getCountOfPlayerForPseudo:(NSString *)pseudo
+{
+    //On défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Player" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    
+    //On rajoute un filtre
+    NSPredicate *newPredicate = [NSPredicate predicateWithFormat:@"pseudo == %@" , pseudo];
+    [fetchRequest setPredicate:newPredicate];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    return (int)[fetchedObjects count];
 }
 
 //On récupère le joueur à l'index donné
@@ -475,6 +532,11 @@
     return nil;
 }
 
+//On update la task donnée après avoir fait quelques tests
+- (NSString *)updateTask:(Task *)task
+{
+    return nil;
+}
 
 //On récupère tous les tasks
 - (NSArray *)getTasks
