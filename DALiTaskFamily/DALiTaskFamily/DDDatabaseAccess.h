@@ -83,7 +83,7 @@
 - (NSString *)createEvent:(Event *)event forPlayer:(Player *)player forTask:(Task *)task atWeekAndYear:(int)weekAndYear;
 
 //On update l'event donné après avoir fait quelques test
-- (NSString *)updateEvent:(Event *)event;
+- (NSString *)updateEvent:(Event *)event forPlayer:(Player *)player forTask:(Task *)task atWeekAndYear:(int)weekAndYear;
 
 //On récupère tous les events
 - (NSArray *)getEvents;
@@ -93,6 +93,9 @@
 
 //On récupère l'event de l'achievement donnée, au jour donné
 - (Event *)getEventForAchievement:(Achievement *)achievement andDay:(NSString *)day;
+
+//On récupère le nombre d'event de l'achievement donnée, au jour donné
+- (int)getCountOfEventForAchievement:(Achievement *)achievement andDay:(NSString *)day;
 
 //On récupère tous les events réalisé d'un player donné pour une task donnée.
 - (int)getNumberOfEventCheckedForPlayer:(Player *)player forTask:(Task *)task;

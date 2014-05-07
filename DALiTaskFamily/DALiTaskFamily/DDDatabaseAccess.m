@@ -77,7 +77,7 @@
 - (Achievement *)createAchievementForPlayer:(Player *)player andTask:(Task *)task atWeekAndYear:(int)weekAndYear
 {
     Achievement *achievement = [NSEntityDescription insertNewObjectForEntityForName:@"Achievement"
-                                                inManagedObjectContext:[DDDatabaseAccess instance].dataBaseManager.managedObjectContext];
+                                                             inManagedObjectContext:[DDDatabaseAccess instance].dataBaseManager.managedObjectContext];
     [achievement setWeekAndYear:[NSNumber numberWithInt:weekAndYear]];
     [achievement setPlayer:player];
     [achievement setTask:task];
@@ -225,7 +225,7 @@
     
     NSError *error;
     NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-
+    
     if ([fetchedObjects count] == 3)
         return [self getTrophiesSortedInArray:fetchedObjects];
     else
@@ -250,7 +250,7 @@
     {
         //On récupère l'achievement du player s'il existe
         Achievement *achievement = [self getAchievementsForPlayer:player forTask:task atWeekAndYear:weekAndYear];
-
+        
         //S'il n'existe pas, on le crée
         if (achievement == nil)
             achievement = [self createAchievementForPlayer:player andTask:task atWeekAndYear:weekAndYear];
@@ -263,7 +263,7 @@
                 return @"Un évènement existe déjà pour cette tache";
         }
         
-        //On sauvegarde le trophy
+        //On sauvegarde l'event
         [self.dataBaseManager.managedObjectContext insertObject:event];
         [achievement addEventsObject:event];
         
@@ -275,8 +275,24 @@
 }
 
 //On update l'event donné après avoir fait quelques test
-- (NSString *)updateEvent:(Event *)event
+- (NSString *)updateEvent:(Event *)event forPlayer:(Player *)player forTask:(Task *)task atWeekAndYear:(int)weekAndYear
 {
+    //On récupère l'achievement du player s'il existe
+    Achievement *achievement = [self getAchievementsForPlayer:player forTask:task atWeekAndYear:weekAndYear];
+    
+    //S'il n'existe pas, on le crée
+    if (achievement == nil)
+        achievement = [self createAchievementForPlayer:player andTask:task atWeekAndYear:weekAndYear];
+    
+    [event setAchievement:achievement];
+    
+    //On regarde si on a pas déjà un event qui existe pour ce jour
+    int countOfEvent = [self getCountOfEventForAchievement:achievement andDay:event.day];
+    if (countOfEvent >= 2)
+        return @"Un évènement existe déjà pour cette tache";
+    
+    //On sauvegarde l'event
+    [self saveContext];
     return nil;
 }
 
@@ -316,6 +332,19 @@
     }
     
     return nil;
+}
+
+//On récupère le nombre d'event de l'achievement donnée, au jour donné
+- (int)getCountOfEventForAchievement:(Achievement *)achievement andDay:(NSString *)day
+{
+    int count = 0;
+    for (Event *event in [[achievement events] allObjects])
+    {
+        if ([event.day isEqualToString:day])
+            count ++;
+    }
+    
+    return count;
 }
 
 //On récupère tous les events réalisé d'un player donné pour une task donnée.
@@ -528,7 +557,7 @@
     }
     else
         return @"Veuillez remplir tous les champs liés à la tache !";
-
+    
     return nil;
 }
 

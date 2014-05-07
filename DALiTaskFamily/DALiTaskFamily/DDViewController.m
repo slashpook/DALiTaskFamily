@@ -45,23 +45,25 @@
     Task *task = [[DDDatabaseAccess instance] getTaskWithLibelle:@"Tache 1"];
     Task *task2 = [[DDDatabaseAccess instance] getTaskWithLibelle:@"Tache 2"];
     
-    [self addEventForPlayer:player andTask:task atDay:@"Lundi"];
-    [self addEventForPlayer:player andTask:task atDay:@"Lundi"];
-    [self addEventForPlayer:player andTask:task2 atDay:@"Lundi"];
-    [self addEventForPlayer:player andTask:task atDay:@"Mardi"];
-    [self addEventForPlayer:player2 andTask:task atDay:@"Lundi"];
-    [self addEventForPlayer:player2 andTask:task atDay:@"Vendredi"];
-    [self addEventForPlayer:player2 andTask:task2 atDay:@"Lundi"];
+//    [self addEventForPlayer:player andTask:task atDay:@"Lundi"];
+//    [self addEventForPlayer:player andTask:task atDay:@"Lundi"];
+//    [self addEventForPlayer:player andTask:task2 atDay:@"Lundi"];
+//    [self addEventForPlayer:player andTask:task atDay:@"Mardi"];
+//    [self addEventForPlayer:player2 andTask:task atDay:@"Lundi"];
+//    [self addEventForPlayer:player2 andTask:task atDay:@"Vendredi"];
+//    [self addEventForPlayer:player2 andTask:task2 atDay:@"Lundi"];
     
-    NSArray *arrayEvent = [[DDDatabaseAccess instance] getEventsForPlayer:player atWeekAndYear:201423 andDay:@"Lundi"];
+    NSArray *arrayEvent = [[DDDatabaseAccess instance] getEventsForPlayer:player atWeekAndYear:201409 andDay:@"Samedi"];
     
     for (Event *event in arrayEvent) {
         NSLog(@"Event pour le joueur : %@, tache : %@, jour : %@, weekAndYear : %@", event.achievement.player.pseudo, event.achievement.task.libelle, event.day, event.achievement.weekAndYear);
     }
 
-    [player2 setPseudo:@"Thomas"];
-    NSString *message = [[DDDatabaseAccess instance] updatePlayer:player2];
-    NSLog(@"%@", message);
+    NSLog(@"Micro Test ------------- Micro Test");
+    Achievement *achievement = [[DDDatabaseAccess instance] getAchievementsForPlayer:player forTask:task atWeekAndYear:201423];
+    Event *event = [[DDDatabaseAccess instance] getEventForAchievement:achievement andDay:@"Lundi"];
+    [event setDay:@"Mercredi"];
+    [[DDDatabaseAccess instance] updateEvent:event forPlayer:player forTask:task2 atWeekAndYear:201409];
 }
 
 - (void)addPlayerWithName:(NSString *)pseudo
