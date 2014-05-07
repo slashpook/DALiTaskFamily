@@ -35,13 +35,13 @@
     <entity name="Task" representedClassName="Task" syncable="YES">
         <attribute name="history" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="libelle" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="point" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="point" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
         <relationship name="achievments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Achievement" inverseName="task" inverseEntity="Achievement" syncable="YES"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryTask" inverseName="tasks" inverseEntity="CategoryTask" syncable="YES"/>
         <relationship name="trophies" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Trophy" inverseName="task" inverseEntity="Trophy" syncable="YES"/>
     </entity>
     <entity name="Trophy" representedClassName="Trophy" syncable="YES">
-        <attribute name="iteration" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="iteration" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="trophies" inverseEntity="Task" syncable="YES"/>
     </entity>

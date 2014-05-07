@@ -29,7 +29,7 @@
     
     [self addTaskWithLibelle:@"Tache 3" andPoint:300];
     [self addTaskWithLibelle:@"Tache 1" andPoint:800];
-    [self addTaskWithLibelle:@"Tache 2" andPoint:500];
+    [self addTaskWithLibelle:@"Tache 4" andPoint:500];
     
     NSArray *arrayTask = [[DDDatabaseAccess instance] getTasks];
     for (Task *task in arrayTask) {

@@ -142,6 +142,9 @@
 //On récupère la task avec le libellé donné
 - (Task *)getTaskWithLibelle:(NSString *)libelle;
 
+//On renvoie le nombre de task avec le libellé donné
+- (int)getCountOfTaskWithLibelle:(NSString *)libelle;
+
 //On supprime la task donnée
 - (void)deleteTask:(Task *)task;
 
@@ -150,6 +153,9 @@
 
 //On crée le trophy après avoir fait quelques tests préalable
 - (NSString *)createTrophy:(Trophy *)trophy;
+
+//On update le trophy après avoir fait quelques tests préalable
+- (NSString *)updateTrophy:(Trophy *)trophy;
 
 //On récupère tous les trophies
 - (NSArray *)getTrophies;

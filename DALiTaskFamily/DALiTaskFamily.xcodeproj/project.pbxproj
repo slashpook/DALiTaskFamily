@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D123A57191A355900991D63 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D123A56191A355900991D63 /* Task.m */; };
+		6D123A5A191A355900991D63 /* Trophy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D123A59191A355900991D63 /* Trophy.m */; };
 		6D545D3F190C11B9001ADBAE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D545D3E190C11B9001ADBAE /* Foundation.framework */; };
 		6D545D41190C11B9001ADBAE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D545D40190C11B9001ADBAE /* CoreGraphics.framework */; };
 		6D545D43190C11B9001ADBAE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D545D42190C11B9001ADBAE /* UIKit.framework */; };
@@ -22,14 +24,12 @@
 		6D545D68190C11BA001ADBAE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D545D66190C11BA001ADBAE /* InfoPlist.strings */; };
 		6D545D6A190C11BA001ADBAE /* DALiTaskFamilyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D545D69190C11BA001ADBAE /* DALiTaskFamilyTests.m */; };
 		6D545D78190C144B001ADBAE /* iTaskFamily.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D545D76190C144B001ADBAE /* iTaskFamily.xcdatamodeld */; };
-		6D545D7E190C19F4001ADBAE /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D545D7D190C19F4001ADBAE /* Task.m */; };
 		6D545D87190C19F4001ADBAE /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D545D86190C19F4001ADBAE /* Player.m */; };
 		6D545D8D190C19F4001ADBAE /* CategoryTrophy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D545D8C190C19F4001ADBAE /* CategoryTrophy.m */; };
 		6D545D90190C1B1A001ADBAE /* DDDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D545D8F190C1B1A001ADBAE /* DDDatabaseManager.m */; };
 		6D545D96190C1CEA001ADBAE /* CategoryTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D545D95190C1CEA001ADBAE /* CategoryTask.m */; };
 		6D5CD672190D4132002E226B /* DDDatabaseAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5CD671190D4132002E226B /* DDDatabaseAccess.m */; };
 		6D5CD675190D4C33002E226B /* Achievement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5CD674190D4C33002E226B /* Achievement.m */; };
-		6D5CD678190D5132002E226B /* Trophy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5CD677190D5132002E226B /* Trophy.m */; };
 		6D6C342F19105B6600092AB2 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6C342E19105B6600092AB2 /* Event.m */; };
 		6D6C343219105BD900092AB2 /* Reward.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6C343119105BD900092AB2 /* Reward.m */; };
 /* End PBXBuildFile section */
@@ -45,6 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D123A55191A355900991D63 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		6D123A56191A355900991D63 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		6D123A58191A355900991D63 /* Trophy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trophy.h; sourceTree = "<group>"; };
+		6D123A59191A355900991D63 /* Trophy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trophy.m; sourceTree = "<group>"; };
 		6D545D3B190C11B9001ADBAE /* DALiTaskFamily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DALiTaskFamily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D545D3E190C11B9001ADBAE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6D545D40190C11B9001ADBAE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -65,8 +69,6 @@
 		6D545D67190C11BA001ADBAE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D545D69190C11BA001ADBAE /* DALiTaskFamilyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DALiTaskFamilyTests.m; sourceTree = "<group>"; };
 		6D545D77190C144B001ADBAE /* iTaskFamily.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iTaskFamily.xcdatamodel; sourceTree = "<group>"; };
-		6D545D7C190C19F4001ADBAE /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
-		6D545D7D190C19F4001ADBAE /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 		6D545D85190C19F4001ADBAE /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		6D545D86190C19F4001ADBAE /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		6D545D8B190C19F4001ADBAE /* CategoryTrophy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTrophy.h; sourceTree = "<group>"; };
@@ -79,8 +81,6 @@
 		6D5CD671190D4132002E226B /* DDDatabaseAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDatabaseAccess.m; sourceTree = "<group>"; };
 		6D5CD673190D4C33002E226B /* Achievement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Achievement.h; sourceTree = "<group>"; };
 		6D5CD674190D4C33002E226B /* Achievement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Achievement.m; sourceTree = "<group>"; };
-		6D5CD676190D5132002E226B /* Trophy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trophy.h; sourceTree = "<group>"; };
-		6D5CD677190D5132002E226B /* Trophy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trophy.m; sourceTree = "<group>"; };
 		6D6C342D19105B6600092AB2 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		6D6C342E19105B6600092AB2 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		6D6C343019105BD900092AB2 /* Reward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reward.h; sourceTree = "<group>"; };
@@ -205,14 +205,14 @@
 				6D545D8C190C19F4001ADBAE /* CategoryTrophy.m */,
 				6D545D85190C19F4001ADBAE /* Player.h */,
 				6D545D86190C19F4001ADBAE /* Player.m */,
-				6D545D7C190C19F4001ADBAE /* Task.h */,
-				6D545D7D190C19F4001ADBAE /* Task.m */,
-				6D5CD676190D5132002E226B /* Trophy.h */,
-				6D5CD677190D5132002E226B /* Trophy.m */,
 				6D6C342D19105B6600092AB2 /* Event.h */,
 				6D6C342E19105B6600092AB2 /* Event.m */,
 				6D6C343019105BD900092AB2 /* Reward.h */,
 				6D6C343119105BD900092AB2 /* Reward.m */,
+				6D123A55191A355900991D63 /* Task.h */,
+				6D123A56191A355900991D63 /* Task.m */,
+				6D123A58191A355900991D63 /* Trophy.h */,
+				6D123A59191A355900991D63 /* Trophy.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -327,20 +327,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D123A57191A355900991D63 /* Task.m in Sources */,
 				6D545D4F190C11B9001ADBAE /* DDAppDelegate.m in Sources */,
 				6D5CD675190D4C33002E226B /* Achievement.m in Sources */,
-				6D5CD678190D5132002E226B /* Trophy.m in Sources */,
 				6D6C342F19105B6600092AB2 /* Event.m in Sources */,
 				6D545D90190C1B1A001ADBAE /* DDDatabaseManager.m in Sources */,
 				6D545D55190C11B9001ADBAE /* DDViewController.m in Sources */,
 				6D545D78190C144B001ADBAE /* iTaskFamily.xcdatamodeld in Sources */,
-				6D545D7E190C19F4001ADBAE /* Task.m in Sources */,
 				6D545D4B190C11B9001ADBAE /* main.m in Sources */,
 				6D545D8D190C19F4001ADBAE /* CategoryTrophy.m in Sources */,
 				6D6C343219105BD900092AB2 /* Reward.m in Sources */,
 				6D545D96190C1CEA001ADBAE /* CategoryTask.m in Sources */,
 				6D545D87190C19F4001ADBAE /* Player.m in Sources */,
 				6D5CD672190D4132002E226B /* DDDatabaseAccess.m in Sources */,
+				6D123A5A191A355900991D63 /* Trophy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

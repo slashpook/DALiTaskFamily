@@ -535,6 +535,34 @@
 //On update la task donnée après avoir fait quelques tests
 - (NSString *)updateTask:(Task *)task
 {
+    NSString *errorMessage = nil;
+    
+    //On parse les trophies pour voir s'ils sont tous bon
+    for (Trophy *trophy in [[task trophies] allObjects])
+    {
+        errorMessage = [self updateTrophy:trophy];
+        if (errorMessage != nil)
+        {
+            [self rollback];
+            return errorMessage;
+        }
+    }
+    
+    if ([task.libelle length] != 0 && task.point != nil)
+    {
+        //On fait les tests sur la tache
+        if ([self getCountOfTaskWithLibelle:task.libelle] > 2)
+        {
+            //On sauvegarde la task ainsi que les trophies
+            [self saveContext];
+            return nil;
+        }
+        else
+            return @"Une autre tache porte déjà ce nom!";
+    }
+    else
+        return @"Veuillez remplir tous les champs liés à la tache !";
+    
     return nil;
 }
 
@@ -598,6 +626,26 @@
     return nil;
 }
 
+//On renvoie le nombre de task avec le libellé donné
+- (int)getCountOfTaskWithLibelle:(NSString *)libelle
+{
+    //On défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Task" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    
+    //On rajoute un filtre
+    NSPredicate *newPredicate = [NSPredicate predicateWithFormat:@"libelle == %@", libelle];
+    [fetchRequest setPredicate:newPredicate];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    //On renvoie le count des tasks
+    return (int)[fetchedObjects count];
+}
+
 //On supprime la task donnée
 - (void)deleteTask:(Task *)task
 {
@@ -615,7 +663,18 @@
     {
         //On sauvegarde le trophy
         [self.dataBaseManager.managedObjectContext insertObject:trophy];
-        [self saveContext];
+        return nil;
+    }
+    else
+        return [NSString stringWithFormat:@"Vous devez renseigner un trophée de %@", trophy.type];
+}
+
+//On update le trophy après avoir fait quelques tests préalable
+- (NSString *)updateTrophy:(Trophy *)trophy
+{
+    //On teste juste si on a bien une iteration pour le trophy
+    if (trophy.iteration != nil)
+    {
         return nil;
     }
     else
