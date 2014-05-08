@@ -516,6 +516,60 @@
 }
 
 
+#pragma mark - CRUD Reward
+
+//On sauvegarde le reward après avoir fait quelques tests préalable
+- (NSString *)saveReward:(Reward *)reward
+{
+    //On sauvegarde le trophy
+    [self saveContext];
+    return nil;
+}
+
+//On tri le tableau de rewards
+- (NSArray *)getRewardSortedInArray:(NSArray *)arrayTrophies
+{
+    //On crée le tableau de rewards et on les récupère dans le bon ordre
+    NSMutableArray *arrayTrophiesSort = [[NSMutableArray alloc] init];
+    
+    [arrayTrophiesSort addObject:[self getTrophyForType:@"Bronze" inArray:arrayTrophies]];
+    [arrayTrophiesSort addObject:[self getTrophyForType:@"Argent" inArray:arrayTrophies]];
+    [arrayTrophiesSort addObject:[self getTrophyForType:@"Or" inArray:arrayTrophies]];
+    
+    return arrayTrophiesSort;
+}
+
+//On récupère le reward pour le type donnée
+- (Reward *)getRewardForType:(NSString *)type
+{
+    //On défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Reward" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    
+    //On rajoute un filtre
+    NSPredicate *newPredicate = [NSPredicate predicateWithFormat:@"type == %@" , type];
+    [fetchRequest setPredicate:newPredicate];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    //On renvoie la première donnée de la requète
+    if ([fetchedObjects count] > 0)
+        return [fetchedObjects objectAtIndex:0];
+    else
+        return nil;
+}
+
+//On supprime le reward donné
+- (void)deleteReward:(Reward *)reward
+{
+    [self.dataBaseManager.managedObjectContext deleteObject:reward];
+    [self saveContext];
+}
+
+
 #pragma mark - CRUD Task
 
 //On crée la task après avoir fait quelques tests préalable

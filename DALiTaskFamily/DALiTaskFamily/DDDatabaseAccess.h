@@ -128,6 +128,21 @@
 - (void)deletePlayer:(Player *)player;
 
 
+#pragma mark - CRUD Reward
+
+//On sauvegarde le reward après avoir fait quelques tests préalable
+- (NSString *)saveReward:(Reward *)reward;
+
+//On tri le tableau de rewards
+- (NSArray *)getRewardSortedInArray:(NSArray *)arrayTrophies;
+
+//On récupère le reward pour le type donnée
+- (Reward *)getRewardForType:(NSString *)type;
+
+//On supprime le reward donné
+- (void)deleteReward:(Reward *)reward;
+
+
 #pragma mark - CRUD Task
 
 //On crée la task après avoir fait quelques tests préalable

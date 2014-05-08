@@ -21,5 +21,6 @@
     #import "Player.h"
     #import "Task.h"
     #import "Trophy.h"
+    #import "Reward.h"
     #import "DDDatabaseAccess.h"
 #endif
