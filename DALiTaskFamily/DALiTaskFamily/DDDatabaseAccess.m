@@ -188,9 +188,10 @@
 #pragma mark - CRUD CategoryTrophy
 
 //On crée le player après avoir fait quelques tests préalable
-- (void)createCategoryTrophy:(CategoryTrophy *)categoryTrophy
+- (void)createCategoryTrophy:(CategoryTrophy *)categoryTrophy withCategory:(CategoryTask *)category
 {
     [self.dataBaseManager.managedObjectContext insertObject:categoryTrophy];
+    [categoryTrophy setCategory:category];
     [self saveContext];
 }
 
@@ -701,7 +702,7 @@
     
     NSError *error;
     NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-
+    
     //On renvoie le tableau de la requète
     return fetchedObjects;
 }
