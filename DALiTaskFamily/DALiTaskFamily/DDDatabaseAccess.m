@@ -683,6 +683,29 @@
     return fetchedObjects;
 }
 
+//On récupère le tableau des historique d'utilisation des tasks
+- (NSArray *)getArrayHistoriqueTask
+{
+    //On défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Task" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entityDescription];
+    [fetchRequest setFetchLimit:10];
+    
+    //On rajoute un tri sur l'history
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"history"
+                                                                   ascending:NO];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+
+    //On renvoie le tableau de la requète
+    return fetchedObjects;
+}
+
 //On récupère la task avec le libellé donné
 - (Task *)getTaskWithLibelle:(NSString *)libelle
 {

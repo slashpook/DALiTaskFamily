@@ -157,6 +157,9 @@
 //On récupère les tasks d'une categoryTask
 - (NSArray *)getTasksForCategory:(CategoryTask *)category;
 
+//On récupère le tableau des historique d'utilisation des tasks
+- (NSArray *)getArrayHistoriqueTask;
+
 //On récupère la task avec le libellé donné
 - (Task *)getTaskWithLibelle:(NSString *)libelle;
 
