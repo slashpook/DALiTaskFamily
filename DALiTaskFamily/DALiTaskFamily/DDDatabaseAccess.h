@@ -115,6 +115,9 @@
 //On récupère tous les players
 - (NSArray *)getPlayers;
 
+//On récupère le premier player
+- (Player *)getFirstPlayer;
+
 //On récupère le joueur donné
 - (Player *)getPlayerForPseudo:(NSString *)pseudo;
 

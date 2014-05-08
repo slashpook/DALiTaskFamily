@@ -456,6 +456,35 @@
     return arrayEntities;
 }
 
+//On récupère le premier player
+- (Player *)getFirstPlayer
+{
+    //On Défini la classe pour la requète
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Player" inManagedObjectContext:self.dataBaseManager.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setFetchLimit:1];
+    
+    //On rajoute un tri sur l'history
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"pseudo"
+                                                                   ascending:NO];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.dataBaseManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    //Si on a des objets on retourne NO
+    if (fetchedObjects.count > 0)
+    {
+        return [fetchedObjects objectAtIndex:0];
+    }
+    
+    return nil;
+}
+
 //On récupère le joueur donné
 - (Player *)getPlayerForPseudo:(NSString *)pseudo
 {
